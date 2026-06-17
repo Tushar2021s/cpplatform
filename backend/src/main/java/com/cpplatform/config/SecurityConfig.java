@@ -51,7 +51,7 @@ public class SecurityConfig {
                 "http://localhost:3000",
                 "http://localhost:5173",
                 "https://cpplatform.vercel.app"  // we'll get exact URL in step 4
-                "https://cpplatform-ems34lcam-rahsut.vercel.app"
+
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
