@@ -6,6 +6,8 @@ import com.cpplatform.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -16,21 +18,22 @@ public class AuthController {
         this.authService = authService;
     }
 
-    // POST /api/auth/codeforces
-    // body: { "handle": "tourist" }
-    @PostMapping("/codeforces")
-    public ResponseEntity<AuthResponse> loginWithCodeforces(
-            @RequestBody AuthRequest request) {
-        AuthResponse response = authService.loginWithCodeforces(request.getHandle());
-        return ResponseEntity.ok(response);
+    // POST /api/auth/google   body: { "token": "<google id token>" }
+    @PostMapping("/google")
+    public ResponseEntity<AuthResponse> loginWithGoogle(@RequestBody AuthRequest request) {
+        return ResponseEntity.ok(authService.loginWithGoogle(request.getToken()));
     }
 
-    // GET /api/auth/test-cf?handle=tourist
-    // quick test endpoint
-    @GetMapping("/test-cf")
-    public ResponseEntity<AuthResponse> testCf(
-            @RequestParam String handle) {
-        AuthResponse response = authService.loginWithCodeforces(handle);
-        return ResponseEntity.ok(response);
+    // GET /api/auth/codeforces/challenge?handle=tourist
+    @GetMapping("/codeforces/challenge")
+    public ResponseEntity<Map<String, Object>> getChallenge(@RequestParam String handle) {
+        return ResponseEntity.ok(authService.startCodeforcesVerification(handle));
+    }
+
+    // POST /api/auth/codeforces/login   body: { "handle": "tourist" }
+    // only works if this handle is already linked to a registered account
+    @PostMapping("/codeforces/login")
+    public ResponseEntity<AuthResponse> loginWithCodeforces(@RequestBody AuthRequest request) {
+        return ResponseEntity.ok(authService.loginWithCodeforces(request.getHandle()));
     }
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
-
+import LinkCodeforces from '../components/LinkCodeforces'
 interface Problem {
     id: number
     name: string
@@ -124,7 +124,7 @@ export default function Problems() {
             </nav>
 
             <div className="max-w-6xl mx-auto px-6 py-8">
-
+                {!user?.codeforcesHandle && <LinkCodeforces />}
                 {/* Filters */}
                 <div className="flex gap-4 mb-6 flex-wrap">
                     <select

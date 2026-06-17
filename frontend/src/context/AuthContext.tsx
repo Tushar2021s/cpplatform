@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import api from '../api/axios'
 
 interface User {
     email: string
     name: string
     avatarUrl: string
+    codeforcesHandle?: string
 }
 
 interface AuthContextType {
@@ -11,6 +13,7 @@ interface AuthContextType {
     jwt: string | null
     login: (jwt: string, user: User) => void
     logout: () => void
+    refreshUser: () => Promise<void>
     isLoggedIn: boolean
 }
 
@@ -20,7 +23,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
 
-    // on app load, restore session from localStorage
     useEffect(() => {
         const storedJwt  = localStorage.getItem('jwt')
         const storedUser = localStorage.getItem('user')
@@ -44,9 +46,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(null)
     }
 
+    // re-fetch profile from backend — used after linking a CF handle
+    const refreshUser = async () => {
+        try {
+            const res = await api.get('/api/user/profile')
+            const updated: User = {
+                email: res.data.email,
+                name: res.data.name,
+                avatarUrl: res.data.avatarUrl,
+                codeforcesHandle: res.data.codeforcesHandle,
+            }
+            localStorage.setItem('user', JSON.stringify(updated))
+            setUser(updated)
+        } catch (e) {
+            console.error('Failed to refresh user', e)
+        }
+    }
+
     return (
         <AuthContext.Provider value={{
-            user, jwt, login, logout, isLoggedIn: !!jwt
+            user, jwt, login, logout, refreshUser, isLoggedIn: !!jwt
         }}>
             {children}
         </AuthContext.Provider>
