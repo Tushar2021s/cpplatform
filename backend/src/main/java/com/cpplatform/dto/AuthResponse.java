@@ -5,12 +5,13 @@ public class AuthResponse {
     private String email;
     private String name;
     private String avatarUrl;
-
-    public AuthResponse(String jwt, String email, String name, String avatarUrl) {
+    private String codeforcesHandle;
+    public AuthResponse(String jwt, String email, String name, String avatarUrl, String codeforcesHandle) {
         this.jwt = jwt;
         this.email = email;
         this.name = name;
         this.avatarUrl = avatarUrl;
+        this.codeforcesHandle = codeforcesHandle;
     }
 
     public String getJwt()               { return jwt; }
@@ -24,4 +25,7 @@ public class AuthResponse {
 
     public String getAvatarUrl()             { return avatarUrl; }
     public void setAvatarUrl(String url)     { this.avatarUrl = url; }
+
+    public String getCodeforcesHandle()           { return codeforcesHandle; }
+    public void setCodeforcesHandle(String handle) { this.codeforcesHandle = handle; }
 }

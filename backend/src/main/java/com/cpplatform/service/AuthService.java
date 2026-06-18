@@ -78,7 +78,7 @@ public class AuthService {
         }
 
         String jwt = jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(jwt, user.getEmail(), user.getName(), user.getAvatarUrl());
+        return new AuthResponse(jwt, user.getEmail(), user.getName(), user.getAvatarUrl(), user.getCodeforcesHandle());
     }
 
     // ── CODEFORCES CHALLENGE (shared by both linking and CF-login) ──
@@ -181,6 +181,6 @@ public class AuthService {
         verificationService.clearChallenge(handle);
 
         String jwt = jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(jwt, user.getEmail(), user.getName(), user.getAvatarUrl());
+        return new AuthResponse(jwt, user.getEmail(), user.getName(), user.getAvatarUrl(), user.getCodeforcesHandle());
     }
 }

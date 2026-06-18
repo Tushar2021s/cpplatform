@@ -52,8 +52,8 @@ export default function Login() {
         setError('')
         try {
             const res = await api.post('/api/auth/google', { token: response.credential })
-            const { jwt, email, name, avatarUrl } = res.data
-            login(jwt, { email, name, avatarUrl })
+            const { jwt, email, name, avatarUrl, codeforcesHandle } = res.data
+            login(jwt, { email, name, avatarUrl, codeforcesHandle })
             navigate('/problems')
         } catch (err: any) {
             setError(err.response?.data?.message || 'Google sign-in failed')
