@@ -1,22 +1,60 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import Login from './pages/Login'
+import Home from './pages/Home'
 import Problems from './pages/Problems'
-
+import Dashboard from './pages/Dashboard'
+import Profile from './pages/Profile'
+import ComingSoon from './pages/ComingSoon'
+import DailyProblem from './pages/DailyProblem'
+import Leaderboard from './pages/Leaderboard'
 export default function App() {
-  return (
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login"    element={<Login />} />
-            <Route path="/problems" element={<Problems />} />
-            <Route path="*"         element={<Navigate to="/login" />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-  )
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/login"       element={<Login />} />
+                    <Route path="/home"        element={<Home />} />
+                    <Route path="/problems"    element={<Problems />} />
+                    <Route path="/dashboard"   element={<Dashboard />} />
+                    <Route path="/profile"     element={<Profile />} />
+                    <Route path="/daily" element={<DailyProblem />} />
+                    <Route path="/leaderboard" element={<Leaderboard />} />
+                    <Route path="*"            element={<Navigate to="/login" />} />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+    )
 }
 
+
+
+
+
+
+
+
+
+
+// import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+// import { AuthProvider } from './context/AuthContext'
+// import Login from './pages/Login'
+// import Problems from './pages/Problems'
+//
+// export default function App() {
+//   return (
+//       <AuthProvider>
+//         <BrowserRouter>
+//           <Routes>
+//             <Route path="/login"    element={<Login />} />
+//             <Route path="/problems" element={<Problems />} />
+//             <Route path="*"         element={<Navigate to="/login" />} />
+//           </Routes>
+//         </BrowserRouter>
+//       </AuthProvider>
+//   )
+// }
+//
 
 
 
