@@ -79,7 +79,7 @@ export default function Dashboard() {
     const weeks = buildYearGrid(year, solvedMap)
     const totalSolved = Object.values(solvedMap).reduce((a, b) => a + b, 0)
     const activeDays = Object.keys(solvedMap).length
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+
 
     return (
         <div className="min-h-screen bg-black text-white">

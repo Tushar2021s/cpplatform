@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Problems from './pages/Problems'
 import Dashboard from './pages/Dashboard'
 import Profile from './pages/Profile'
-import ComingSoon from './pages/ComingSoon'
+
 import DailyProblem from './pages/DailyProblem'
 import Leaderboard from './pages/Leaderboard'
 export default function App() {
